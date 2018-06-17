@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "save": {
+      "matchCondition": {
+        "route": "/api/save",
+        "methods": [
+          "POST"
+        ]
+      },
+      "backendUri": "https://%WEBSITE_HOSTNAME%/api/savepost"
+    },
+    "config": {
+      "matchCondition": {
+        "route": "/api/config",
+        "methods": [
+          "GET",
+          "OPTIONS"
+        ]
+      },
+      "backendUri": "https://%WEBSITE_HOSTNAME%/api/signalrconfiguration"
+    },
+    "default": {
+      "matchCondition": {
+        "route": "",
+        "methods": [
+          "GET",
+          "OPTIONS"
+        ]
+      },
+      "backendUri": "https://%WEBSITE_HOSTNAME%/api/fileserver?file=index.html"
+    },
+    "scripts": {
+      "matchCondition": {
+        "route": "scripts/{*path}",
+        "methods": [
+          "GET",
+          "OPTIONS"
+        ]
+      },
+      "backendUri": "https://%WEBSITE_HOSTNAME%/api/fileserver?file=scripts/{path}"
+    },
+    "styles": {
+      "matchCondition": {
+        "route": "css/{*path}",
+        "methods": [
+          "GET",
+          "OPTIONS"
+        ]
+      },
+      "backendUri": "https://%WEBSITE_HOSTNAME%/api/fileserver?file=css/{path}"
+    }
+  }
+}
