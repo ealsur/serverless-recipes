@@ -49,6 +49,16 @@
         ]
       },
       "backendUri": "https://%WEBSITE_HOSTNAME%/api/fileserver?file=css/{path}"
+    },
+    "images": {
+      "matchCondition": {
+        "route": "images/{*path}",
+        "methods": [
+          "GET",
+          "OPTIONS"
+        ]
+      },
+      "backendUri": "https://%WEBSITE_HOSTNAME%/api/fileserver?file=images/{path}"
     }
   }
 }

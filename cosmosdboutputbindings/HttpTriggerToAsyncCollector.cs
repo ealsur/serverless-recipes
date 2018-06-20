@@ -16,7 +16,7 @@ namespace cosmosdboutputbindings
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] MyClass[] inputDocuments, [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
-                ConnectionStringSetting = "CosmosDBConnectionString")] IAsyncCollector<MyClass> documentsToSave, TraceWriter log, [CosmosDBTrigger("", "")] IReadOnlyList<Documents> docs)
+                ConnectionStringSetting = "CosmosDBConnectionString")] IAsyncCollector<MyClass> documentsToSave, TraceWriter log)
         {
             if (inputDocuments == null)
             {

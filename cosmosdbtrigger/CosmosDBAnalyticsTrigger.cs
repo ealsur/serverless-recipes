@@ -9,7 +9,6 @@ using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Rest;
 using System.Threading;
 using System.Net.Http;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using cosmosdbtrigger.Models;
 

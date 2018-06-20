@@ -8,8 +8,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using System;
 using Microsoft.Azure.WebJobs.Host;
 using MimeTypes;
-using System.Collections.Generic;
-using System.Net.Http.Formatting;
 using Microsoft.AspNetCore.Http;
 
 namespace cosmosdbtrigger
