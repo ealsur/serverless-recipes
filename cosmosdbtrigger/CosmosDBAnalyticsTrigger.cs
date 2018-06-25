@@ -16,6 +16,9 @@ namespace cosmosdbtrigger
 {
     public static class CosmosDBAnalyticsTrigger
     {
+        /// <summary>
+        /// Locale to use in text analysis
+        /// </summary>
         private const string languageToAnalyze = "en";
         private static ITextAnalyticsAPI textAnalyticsClient = InitializeTextAnalyticsClient();
 
@@ -31,17 +34,10 @@ namespace cosmosdbtrigger
         /// <summary>
         /// This Cosmos DB Triggered Function calls Cognitive Services to analyze each new user content and then notify the result connected clients through Azure SignalR.
         /// </summary>
-        /// <param name=""chat""></param>
-        /// <param name=""lines""></param>
-        /// <param name=""AzureCosmosDBConnectionString""></param>
-        /// <param name=""AzureCosmosDBConnectionString""></param>
-        /// <param name="true"></param>
-        /// <param name=""leases""></param>
-        /// <returns></returns>
         [FunctionName("CosmosDBAnalyticsTrigger")]
         public static async Task Run([CosmosDBTrigger(
-            databaseName: "chat",
-            collectionName: "lines",
+            databaseName: "%CosmosDBDatabase%",
+            collectionName: "%CosmosDBCollection%",
             ConnectionStringSetting = "AzureCosmosDBConnectionString",
             LeaseConnectionStringSetting = "AzureCosmosDBConnectionString",
             CreateLeaseCollectionIfNotExists = true,

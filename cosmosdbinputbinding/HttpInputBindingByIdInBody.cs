@@ -23,7 +23,8 @@ namespace cosmosdbinputbinding
     {
         [FunctionName("HttpInputBindingByIdInBody")]
         public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequestMessage req, [CosmosDB(databaseName: "%CosmosDBDatabase%",
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequestMessage req,
+            [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
                 Id = "{Query.Id}")] Document document,

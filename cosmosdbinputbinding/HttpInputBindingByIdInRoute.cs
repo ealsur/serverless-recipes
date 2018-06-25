@@ -16,7 +16,8 @@ namespace cosmosdbinputbinding
     {
         [FunctionName("HttpInputBindingByIdInRoute")]
         public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "HttpInputBindingByIdInRoute/{id}")] HttpRequestMessage req, [CosmosDB(databaseName: "%CosmosDBDatabase%",
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "HttpInputBindingByIdInRoute/{id}")] HttpRequestMessage req,
+            [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
                 Id = "{id}")] Document document,

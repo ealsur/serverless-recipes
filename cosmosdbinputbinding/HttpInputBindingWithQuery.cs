@@ -24,7 +24,8 @@ namespace cosmosdbinputbinding
     {
         [FunctionName("HttpInputBindingWithQuery")]
         public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] Query httpQuery, [CosmosDB(databaseName: "%CosmosDBDatabase%",
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] Query httpQuery,
+            [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
                 SqlQuery = "SELECT * FROM d WHERE d.name = {Name} and d.city = {City}")] IEnumerable<dynamic> documents,

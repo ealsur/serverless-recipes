@@ -1,0 +1,12 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+        "CosmosDBDatabase": "<your-database>",
+        "CosmosDBCollection": "<your-collection>",
+        "AzureSignalRConnectionString": "<your-azure-signalr-connectionstring>",
+        "AzureCosmosDBConnectionString": "<your-cosmosdb-connectionstring>",
+        "CognitiveServicesKey": "<your-cognitive-text-key>" 
+    }
+}
