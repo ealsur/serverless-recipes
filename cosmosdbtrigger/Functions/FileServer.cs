@@ -8,13 +8,12 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using System;
 using Microsoft.Azure.WebJobs.Host;
 using MimeTypes;
-using Microsoft.AspNetCore.Http;
 
 namespace cosmosdbtrigger
 {
-    public static class cosmosdbtrigger
+    public static class FileServer
     {
-        const string staticFilesFolder = "wwwroot";
+        const string staticFilesFolder = "www";
         static string defaultPage =
             string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DEFAULT_PAGE")) ?
             "index.html" : Environment.GetEnvironmentVariable("DEFAULT_PAGE");
@@ -24,7 +23,7 @@ namespace cosmosdbtrigger
         /// Based on https://github.com/anthonychu/azure-functions-static-file-server
         /// </summary>
         [FunctionName("FileServer")]
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, TraceWriter log, ExecutionContext context)
+        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequestMessage req, TraceWriter log, ExecutionContext context)
         {
             var filePath = GetFilePath(req, log, context);
 
@@ -35,11 +34,13 @@ namespace cosmosdbtrigger
             return response;
         }
 
-        private static string GetFilePath(HttpRequest req, TraceWriter log, ExecutionContext context)
+        private static string GetFilePath(HttpRequestMessage req, TraceWriter log, ExecutionContext context)
         {
-            var pathValue = req.Query["file"];
+            var pathValue = req.GetQueryNameValuePairs()
+                .FirstOrDefault(q => string.Compare(q.Key, "file", true) == 0)
+                .Value;
 
-            var path = pathValue.FirstOrDefault() ?? "";
+            var path = pathValue ?? "";
 
             var staticFilesPath = Path.GetFullPath(Path.Combine(context.FunctionAppDirectory, staticFilesFolder));
             var fullPath = Path.GetFullPath(Path.Combine(staticFilesPath, path));

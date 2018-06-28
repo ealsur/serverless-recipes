@@ -25,7 +25,7 @@ namespace cosmosdbtrigger
         private static ITextAnalyticsAPI InitializeTextAnalyticsClient()
         {
             ITextAnalyticsAPI textAnalyticsClient = new TextAnalyticsAPI(new ApiKeyServiceClientCredentials(Environment.GetEnvironmentVariable("CognitiveServicesKey")));
-            textAnalyticsClient.AzureRegion = AzureRegions.Westus; // Change if it's in another region
+            textAnalyticsClient.AzureRegion = AzureRegions.Southcentralus; // Change if it's in another region
             return textAnalyticsClient;
         }
 

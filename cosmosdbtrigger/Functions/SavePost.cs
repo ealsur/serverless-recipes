@@ -15,8 +15,8 @@ namespace cosmosdbtrigger
         /// </summary>
         [FunctionName("SavePost")]
         public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] MessagePayload post, [CosmosDB("%CosmosDBDatabase%", "%CosmosDBCollection%", Id = "id", ConnectionStringSetting = "AzureCosmosDBConnectionString")] out dynamic document,
-            TraceWriter log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] MessagePayload post, 
+            [DocumentDB("%CosmosDBDatabase%", "%CosmosDBCollection%", Id = "id", ConnectionStringSetting = "AzureCosmosDBConnectionString")] out dynamic document)
         {
             document = new { id = Guid.NewGuid(), message = post.message };
 
