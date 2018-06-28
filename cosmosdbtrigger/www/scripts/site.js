@@ -21,8 +21,8 @@
                 messages = JSON.parse(messages);
                 for (var i = 0, len = messages.length; i < len; i++) {
                     var post = messages[i];
-                    var feedbackedPost = ctrl.posts.find((post) => { return post.id === data.id });
-                    feedbackedPost.score = response.data.score;
+                    var feedbackedPost = ctrl.posts.find((post) => { return post.id === post.id });
+                    feedbackedPost.score = post.score;
                     feedbackedPost.hasFeedback = true;
                 }
             }
@@ -31,10 +31,6 @@
                 $rootScope.$apply(function(){
                     processMessages(messages);
                 });
-            });
-
-            $rootScope.$on('feedback', function (event, data) {
-               
             });
 
             $rootScope.$on('message', function (event, data) {
