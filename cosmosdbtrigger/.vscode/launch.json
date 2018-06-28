@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "Attach to C# Functions",
-      "type": "coreclr",
+      "type": "clr",
       "request": "attach",
       "processId": "${command:azureFunctions.pickProcess}"
     }
