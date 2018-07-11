@@ -20,9 +20,9 @@
                 if (!messages) return;
                 messages = JSON.parse(messages);
                 for (var i = 0, len = messages.length; i < len; i++) {
-                    var post = messages[i];
-                    var feedbackedPost = ctrl.posts.find((post) => { return post.id === post.id });
-                    feedbackedPost.score = post.score;
+                    var result = messages[i];
+                    var feedbackedPost = ctrl.posts.find((post) => { return post.id === result.id });
+                    feedbackedPost.score = result.score;
                     feedbackedPost.hasFeedback = true;
                 }
             }
@@ -59,7 +59,7 @@
                     ctrl.loading = false;
                     $rootScope.$emit('message', {
                         message: ctrl.message,
-                        id: response.data
+                        id: response.data.id
                     });
                     ctrl.message = '';
                 });
