@@ -13,4 +13,4 @@ You can use Visual Studio Code, Visual Studio or even the [Azure Functions' CLI]
 
 ## Useful links
 
-* [Azure Cosmos DB + Functions Cookbook — HTTP querying](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-http-querying-4afc5ed445d7)
+* [Azure Cosmos DB + Functions Cookbook — Connection modes](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-connection-modes-ecf405a750d9)
