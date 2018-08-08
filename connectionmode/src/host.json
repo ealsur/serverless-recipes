@@ -1,0 +1,6 @@
+{
+  "cosmosDB": {
+    "connectionMode": "Direct",
+    "protocol" : "Tcp"
+  }
+}

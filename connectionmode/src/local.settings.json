@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+      "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+      "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+      "CosmosDBDatabase": "<your-cosmosdb-database>",
+      "CosmosDBCollection": "<your-cosmosdb-collection>",
+      "CosmosDBConnectionString": "<your-cosmosdb-connectionstring>"
+  }
+}
