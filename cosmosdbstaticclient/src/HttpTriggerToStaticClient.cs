@@ -5,6 +5,7 @@ using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -56,7 +57,7 @@ namespace cosmosdbstaticclient
         [FunctionName("HttpTriggerWithStaticClient")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] MyClass[] inputDocuments,
-            TraceWriter log)
+            ILogger log)
         {
             if (inputDocuments == null)
             {
@@ -66,7 +67,7 @@ namespace cosmosdbstaticclient
             foreach (MyClass inputDocument in inputDocuments)
             {
                 await Client.CreateDocumentAsync(CollectionUri, inputDocument);
-                log.Info(inputDocument.id);
+                log.LogInformation(inputDocument.id);
             }
 
             return new HttpResponseMessage(HttpStatusCode.Created);

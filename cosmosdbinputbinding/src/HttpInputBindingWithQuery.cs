@@ -9,6 +9,7 @@ namespace cosmosdbinputbinding
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Host;
+    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -29,10 +30,10 @@ namespace cosmosdbinputbinding
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
                 SqlQuery = "SELECT * FROM d WHERE d.name = {Name} and d.city = {City}")] IEnumerable<dynamic> documents,
-            TraceWriter log)
+            ILogger log)
         {
             int totalDocuments = documents.Count();
-            log.Info($"Found {totalDocuments} documents");
+            log.LogInformation($"Found {totalDocuments} documents");
             if (totalDocuments == 0)
             {
                 return new HttpResponseMessage(HttpStatusCode.NotFound);

@@ -4,6 +4,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using cosmosdboutputbindings.Models;
 using System.Net;
@@ -29,7 +30,7 @@ namespace cosmosdboutputbindings
             [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString")] out MyClass documentToSave,
-            TraceWriter log)
+            ILogger log)
         {
             if (singleDocument == null)
             {

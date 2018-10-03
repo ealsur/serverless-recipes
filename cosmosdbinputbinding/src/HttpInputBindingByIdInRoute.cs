@@ -7,6 +7,7 @@ namespace cosmosdbinputbinding
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Azure.WebJobs.Host;
+    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -21,7 +22,7 @@ namespace cosmosdbinputbinding
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
                 Id = "{id}")] Document document,
-            TraceWriter log)
+            ILogger log)
         {
             if (document == null)
             {

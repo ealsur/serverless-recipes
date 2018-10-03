@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -28,7 +29,7 @@ namespace cosmosdboutputbindings
             [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString")] IAsyncCollector<MyClass> documentsToSave,
-            TraceWriter log)
+            ILogger log)
         {
             if (inputDocuments == null)
             {
@@ -38,7 +39,7 @@ namespace cosmosdboutputbindings
             foreach (MyClass inputDocument in inputDocuments)
             {
                 await documentsToSave.AddAsync(inputDocument);
-                log.Info(inputDocument.id);
+                log.LogInformation(inputDocument.id);
             }
 
             return new HttpResponseMessage(HttpStatusCode.Created);
