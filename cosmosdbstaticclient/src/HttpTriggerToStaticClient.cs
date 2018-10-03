@@ -1,4 +1,5 @@
 using cosmosdbstaticclient.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -6,8 +7,10 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -56,9 +59,12 @@ namespace cosmosdbstaticclient
         
         [FunctionName("HttpTriggerWithStaticClient")]
         public static async Task<HttpResponseMessage> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] MyClass[] inputDocuments,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            MyClass[] inputDocuments = JsonConvert.DeserializeObject<MyClass[]>(requestBody);
+
             if (inputDocuments == null)
             {
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
