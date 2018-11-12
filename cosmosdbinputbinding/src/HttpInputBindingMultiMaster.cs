@@ -1,0 +1,51 @@
+namespace cosmosdbinputbinding
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Text;
+    using cosmosdbinputbinding.Models;
+    using Microsoft.Azure.WebJobs;
+    using Microsoft.Azure.WebJobs.Extensions.Http;
+    using Microsoft.Azure.WebJobs.Host;
+    using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json;
+
+    /// <summary>
+    /// This sample binds a custom <see cref="Query"/> class to the HTTP Trigger and uses its attributes in the Cosmos DB query, it also sets the preferred connection region to Central US or North Central US and the ability to use any region as master (Multi Master).
+    /// </summary>
+    /// <remarks>Sample payload is:
+    /// {
+    ///     "Name": "SomeName",
+    ///     "City": "SomeCity"
+    /// }
+    /// </remarks>
+    public static class HttpInputBindingMultiMaster
+    {
+        [FunctionName("HttpInputBindingMultiMaster")]
+        public static HttpResponseMessage Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] Query httpQuery,
+            [CosmosDB(databaseName: "%CosmosDBDatabase%",
+                collectionName: "%CosmosDBCollection%",
+                ConnectionStringSetting = "CosmosDBConnectionString",
+                SqlQuery = "SELECT * FROM d WHERE d.name = {Name} and d.city = {City}",
+                UseMultipleWriteLocations = true,
+                PreferredLocations = "Central US,North Central US"
+                )] IEnumerable<dynamic> documents,
+            ILogger log)
+        {
+            int totalDocuments = documents.Count();
+            log.LogInformation($"Found {totalDocuments} documents");
+            if (totalDocuments == 0)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(documents), Encoding.UTF8, "application/json")
+            };
+        }
+    }
+}
