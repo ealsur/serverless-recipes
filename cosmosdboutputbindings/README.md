@@ -7,6 +7,7 @@ It contains 2 different samples:
 
 1. [HttpTriggerToAsyncCollector](./src/HttpTriggerToAsyncCollector.cs): Use an HTTP POST to send a batch of documents to be saved to a container in a single operation.
 2. [HttpTriggerWithSingleDocument](./src/HttpTriggerWithSingleDocument.cs): Use an HTTP POST to send a single document to be saved to a container.
+2. [HttpTriggerToAsyncCollectorMultiMaster](./src/HttpTriggerToAsyncCollectorMultiMaster.cs): Use an HTTP POST to send a batch of documents to be saved to a container in a single operation, with Multi Master support and defining a preferred write region.
 
 ## How to run this sample
 
@@ -15,4 +16,5 @@ You can use Visual Studio Code, Visual Studio or even the [Azure Functions' CLI]
 ## Useful links
 
 * [Azure Cosmos DB + Functions Cookbook — output collector](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-output-collector-fbcdd663280d)
+* [Azure Cosmos DB + Functions Cookbook — Multi master & preferred region](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-multi-master-preferred-region-ac1f7c5d1d31)
 * [More Cosmos DB Output Binding samples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-cosmosdb#output---examples)

@@ -8,6 +8,7 @@ It contains 3 different samples:
 1. [HttpInputBindingByIdInBody](./src/HttpInputBindingByIdInBody.cs): Use an HTTP POST to query for a particular document in a container by matching part of the POST's body to the Id of the document.
 2. [HttpInputBindingByIdInRoute](./src/HttpInputBindingByIdInRoute.cs): Use an HTTP GET to query for a particular document in a container by matching part of the GET's route to the Id of the document.
 3. [HttpInputBindingWithQuery](./src/HttpInputBindingWithQuery.cs): Use an HTTP POST to query for a list of documents matching a custom query using the POST's body attributes as filters.
+4. [HttpInputBindingMultiMaster](./src/HttpInputBindingMultiMaster.cs): Use an HTTP POST to query for a list of documents matching a custom query using the POST's body attributes as filters, defining preferred connection regions, and enabling [Multi Master](https://docs.microsoft.com/azure/cosmos-db/enable-multi-master) support.
 
 ## How to run this sample
 
@@ -16,4 +17,5 @@ You can use Visual Studio Code, Visual Studio or even the [Azure Functions' CLI]
 ## Useful links
 
 * [Azure Cosmos DB + Functions Cookbook — HTTP querying](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-http-querying-4afc5ed445d7)
+* [Azure Cosmos DB + Functions Cookbook — Multi master & preferred region](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-multi-master-preferred-region-ac1f7c5d1d31)
 * [More Cosmos DB Input Binding samples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-cosmosdb#input---examples)
