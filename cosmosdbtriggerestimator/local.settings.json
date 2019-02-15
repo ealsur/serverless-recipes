@@ -1,0 +1,12 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopment=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "CosmosDB": "<your-cosmosdb-connetionstring>",
+        "APPINSIGHTS_INSTRUMENTATIONKEY": "<your-app-insights-key>",
+        "MonitoredDatabase": "<database-to-monitor>",
+        "MonitoredCollection": "<collection-to-monitor>",
+        "MonitoredDatabaseLeasePrefix": "<optional-lease-prefix: It can be empty, see https://medium.com/microsoftazure/azure-cosmos-db-functions-cookbook-multi-trigger-f8938673de57>"
+    }
+}
