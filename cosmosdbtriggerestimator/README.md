@@ -9,5 +9,6 @@ You can use Visual Studio Code, Visual Studio or even the [Azure Functions' CLI]
 
 ## Useful links
 
+* [Azure Cosmos DB + Functions Cookbook — monitoring Trigger pending work](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-monitoring-trigger-pending-work-800b24589235)
 * [Azure Cosmos DB + Functions Cookbook — multi trigger](https://medium.com/@Ealsur/azure-cosmos-db-functions-cookbook-multi-trigger-f8938673de57)
 * [More Cosmos DB Trigger samples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-cosmosdb#trigger---example)
