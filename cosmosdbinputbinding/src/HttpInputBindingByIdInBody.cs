@@ -28,7 +28,8 @@ namespace cosmosdbinputbinding
             [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
-                Id = "{Query.Id}")] Document document,
+                Id = "{Query.Id}",
+                PartitionKey = "{Query.Id}")] Document document,
             ILogger log)
         {
             if (document == null)

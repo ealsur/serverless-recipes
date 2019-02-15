@@ -21,7 +21,8 @@ namespace cosmosdbinputbinding
             [CosmosDB(databaseName: "%CosmosDBDatabase%",
                 collectionName: "%CosmosDBCollection%",
                 ConnectionStringSetting = "CosmosDBConnectionString",
-                Id = "{id}")] Document document,
+                Id = "{id}",
+                PartitionKey = "{id}")] Document document,
             ILogger log)
         {
             if (document == null)
