@@ -9,5 +9,6 @@ run queries and read data from your Cosmos DB containers.
 * [Cosmos DB Output Binding](./cosmosdboutputbindings/README.md): Contains samples on how to use the Cosmos DB Output Binding to save a single document or multiple documents to your Cosmos DB containers.
 * [Client management](./cosmosdbstaticclient/README.md): Contains samples on how to best use a custom Cosmos DB SDK client within Azure Functions optimizing for best performance and avoiding common pitfalls.
 * [Cosmos DB Trigger](./cosmosdbtrigger/README.md): Contains a complete sample using Cosmos DB, [Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/), and [Azure Signal R](https://azure.microsoft.com/services/signalr-service/) to create a flow of data analysis based on events happening in a Cosmos DB container.
+* [Cosmos DB Trigger Scenarios](./\cosmosdbtriggerscenarios/README.md): Contains scenario samples like sharing the leases container.
 * [Custom ConnectionMode & Protocol](./connectionmode/README.md): Contains a complete sample to customize the `ConnectionMode` and `Protocol` used in the internal `DocumentClient` instances for bindings and trigger.
 * [Monitoring the Cosmos DB Trigger progress](./cosmosdbtriggerestimator/README.md): Contains a sample to leverage the Remaining Work Estimator and send progress to App Insights.
