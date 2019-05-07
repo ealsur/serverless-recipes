@@ -1,8 +1,7 @@
 using cosmosdbstaticclient.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Documents;
-using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
@@ -18,47 +17,31 @@ using System.Threading.Tasks;
 namespace cosmosdbstaticclient
 {
     /// <summary>
-    /// This sample binds a custom array of <see cref="MyClass"/> objects from the HTTP Trigger body and uses a custom static <see cref="DocumentClient"/> to save the documents.
+    /// This sample binds a custom array of <see cref="MyClass"/> objects from the HTTP Trigger body and uses a custom static <see cref="CosmosClient"/> to save the documents.
     /// </summary>
     /// <remarks>Sample payload is:
-    /// {
+    /// [{
     ///     "id": "SomeId", /* optional */    
     ///     "name": "SomeName",
     ///     "city": "SomeCity"
-    /// }
+    /// },
+    /// {
+    ///     "id": "SomeOtherId", /* optional */    
+    ///     "name": "SomeOtherName",
+    ///     "city": "SomeOtherCity"
+    /// }]
     /// </remarks>
-    public static class HttpTriggerWithStaticClient
+    public class HttpTriggerWithStaticClient
     {
-        private static Uri CollectionUri = UriFactory.CreateDocumentCollectionUri(
-            Environment.GetEnvironmentVariable("CosmosDBDatabase"),
-            Environment.GetEnvironmentVariable("CosmosDBCollection"));
-        private static DocumentClient Client = GetCustomClient();
-        private static DocumentClient GetCustomClient()
+        private readonly CosmosClient _cosmosClient;
+
+        public HttpTriggerWithStaticClient(CosmosClient cosmosClient)
         {
-            DocumentClient customClient = new DocumentClient(
-                new Uri(Environment.GetEnvironmentVariable("CosmosDBAccountEndpoint")), 
-                Environment.GetEnvironmentVariable("CosmosDBAccountKey"),
-                new ConnectionPolicy
-                {
-                    ConnectionMode = ConnectionMode.Direct,
-                    ConnectionProtocol = Protocol.Tcp,
-                    // Customize retry options for Throttled requests
-                    RetryOptions = new RetryOptions()
-                    {
-                        MaxRetryAttemptsOnThrottledRequests = 10,
-                        MaxRetryWaitTimeInSeconds = 30
-                    }
-                });
-
-            // Customize PreferredLocations
-            customClient.ConnectionPolicy.PreferredLocations.Add(LocationNames.SouthCentralUS);
-            customClient.ConnectionPolicy.PreferredLocations.Add(LocationNames.EastUS);
-
-            return customClient;
+            this._cosmosClient = cosmosClient;
         }
-        
+
         [FunctionName("HttpTriggerWithStaticClient")]
-        public static async Task<HttpResponseMessage> Run(
+        public async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
@@ -72,7 +55,11 @@ namespace cosmosdbstaticclient
 
             foreach (MyClass inputDocument in inputDocuments)
             {
-                await Client.CreateDocumentAsync(CollectionUri, inputDocument);
+                // Assumes a container partitioned by /id
+                await this._cosmosClient
+                    .Databases[Environment.GetEnvironmentVariable("COSMOSDB_DATABASE")]
+                    .Containers[Environment.GetEnvironmentVariable("COSMOSDB_CONTAINER")]
+                    .Items.CreateItemAsync(inputDocument.id, inputDocument);
                 log.LogInformation(inputDocument.id);
             }
 

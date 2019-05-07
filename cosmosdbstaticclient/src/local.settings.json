@@ -3,9 +3,9 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
-    "CosmosDBDatabase": "<your-cosmosdb-database>",
-    "CosmosDBCollection": "<your-cosmosdb-collection>",
-    "CosmosDBAccountEndpoint":"<your-cosmosdb-account-endpoint>",
-    "CosmosDBAccountKey":"<your-cosmosdb-account-key>"
+    "COSMOSDB_DATABASE": "<your-cosmosdb-database>",
+    "COSMOSDB_CONTAINER": "<your-cosmosdb-container>",
+    "COSMOSDB_REGION": "<your-cosmosdb-preferred-region>",
+    "COSMOSDB_CONNECTIONSTRING":"<your-cosmosdb-connectionstring>"
   }
 }
